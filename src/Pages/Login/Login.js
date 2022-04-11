@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import "./Login.css"
 import {
+	useAuthState,
 	useSignInWithFacebook,
 	useSignInWithGoogle,
 } from "react-firebase-hooks/auth"
@@ -15,12 +16,17 @@ const Login = () => {
 	const [password, setPassword] = useState("")
 	const [signInWithGoogle] = useSignInWithGoogle(auth)
 	const [SignInWithFacebook] = useSignInWithFacebook(auth)
-	const [createUserWithEmailAndPassword, user, loading, error] =
+	const [createUserWithEmailAndPassword, error] =
 		useCreateUserWithEmailAndPassword(auth)
+	const navigate = useNavigate()
+	const [user] = useAuthState(auth)
+	if(user?.email){
+		navigate('/')
+	}
 
 	const handleLogin = (event) => {
 		event.preventDefault()
-		createUserWithEmailAndPassword(email,password)
+		createUserWithEmailAndPassword(email, password)
 		console.log(error)
 	}
 	return (
