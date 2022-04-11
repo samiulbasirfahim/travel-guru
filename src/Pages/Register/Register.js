@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import "./Login.css"
+import "../Login/Login.css"
 import {
 	useSignInWithFacebook,
 	useSignInWithGoogle,
@@ -7,26 +7,36 @@ import {
 import googleLogo from "../../images/google.png"
 import facebookLogo from "../../images/fb.png"
 import auth from "../../firebase.init"
-import { useNavigate } from "react-router-dom"
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth"
+import { Link } from "react-router-dom"
 
 const Register = () => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
+	const [rePassword, setRePassword] = useState("")
 	const [signInWithGoogle] = useSignInWithGoogle(auth)
 	const [SignInWithFacebook] = useSignInWithFacebook(auth)
-	const [createUserWithEmailAndPassword, user, loading, error] =
-		useCreateUserWithEmailAndPassword(auth)
 
-	const handleLogin = (event) => {
-		event.preventDefault()
-		createUserWithEmailAndPassword(email, password)
-		console.log(error)
-	}
+
 	return (
 		<div className="login-container">
-			<form onSubmit={handleLogin}>
-				<h1>Login</h1>
+			<form>
+				<h1>Create an account</h1>
+				<input
+					onClick={(e) => setEmail(e.target.value)}
+					placeholder="First Name"
+					type="text"
+					name="first-name"
+					id="first-name"
+					required
+				/>
+				<input
+					onClick={(e) => setEmail(e.target.value)}
+					placeholder="Last Name"
+					type="text"
+					name="last-name"
+					id="last-name"
+					required
+				/>
 				<input
 					onClick={(e) => setEmail(e.target.value)}
 					placeholder="Username or Email"
@@ -43,6 +53,14 @@ const Register = () => {
 					id="password"
 					required
 				/>
+				<input
+					onClick={(e) => setRePassword(e.target.value)}
+					placeholder="Confirm Password"
+					type="Password"
+					name="rePassword"
+					id="password"
+					required
+				/>
 				<div className="input-container">
 					<p>
 						<input type="checkbox" name="checkbox" id="checkbox" />
@@ -50,10 +68,10 @@ const Register = () => {
 					</p>
 					<p className="forgot-password">Forgot password?</p>
 				</div>
-				<input type="submit" value="Login" id="login-btn" />
+				<input type="submit" value="Create an account" id="login-btn" />
 				<div className="create-account-redirect">
 					<p> Don't have an account?</p>
-					<p>Create an account</p>
+					<Link to="/login">Create an account</Link>
 				</div>
 			</form>
 			<p className="or">Or</p>

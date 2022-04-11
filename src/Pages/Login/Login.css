@@ -3,6 +3,7 @@
 	align-items: center;
 	flex-direction: column;
 	margin-top: 109px;
+	justify-content: center;
 }
 .login-container button {
 	background: #ffffff;
@@ -25,13 +26,7 @@
 	margin-top: 9px;
 	cursor: pointer;
 }
-.or {
-	display: flex;
-	width: 100%;
-}
-.or hr {
-	border-top: 1px solid black;
-}
+
 .login-container button img {
 	position: absolute;
 	left: 8px;
