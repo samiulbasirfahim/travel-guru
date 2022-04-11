@@ -1,5 +1,7 @@
 import React from "react"
 import "./Login.css"
+import googleLogo from "../../images/google.png"
+import facebookLogo from "../../images/fb.png"
 
 const Login = () => {
 	return (
@@ -20,17 +22,32 @@ const Login = () => {
 				/>
 				<div className="input-container">
 					<p>
-						<input type="checkbox" name="checkbox" id="checkbox" />{" "}
+						<input type="checkbox" name="checkbox" id="checkbox" />
 						Remember me?
 					</p>
 					<p className="forgot-password">Forgot password?</p>
 				</div>
 				<input type="submit" value="Login" id="login-btn" />
 				<div className="create-account-redirect">
-					<p>Don't have an account?</p>
+					<p> Don't have an account?</p>
 					<p>Create an account</p>
 				</div>
 			</form>
+			<p className="or">
+				<hr />
+				Or
+				<hr />
+			</p>
+			<div className="button-container">
+				<button>
+					<img src={googleLogo} alt="" width="37" height="37" />
+					Continue with Facebook
+				</button>
+				<button>
+					<img src={facebookLogo} alt="" width="37" height="37" />
+					Continue with Google
+				</button>
+			</div>
 		</div>
 	)
 }

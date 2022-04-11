@@ -1,8 +1,43 @@
 .login-container {
 	display: flex;
-	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 109px;
 }
-
+.login-container button {
+	background: #ffffff;
+	border: 1px solid #c7c7c7;
+	box-sizing: border-box;
+	border-radius: 57px;
+	width: 461px;
+	height: 51px;
+	font-family: "Montserrat";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	/* identical to box height */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #000000;
+	position: relative;
+	margin-top: 9px;
+}
+.or {
+	display: flex;
+	width: 100%;
+}
+.or hr {
+	border-top: 1px solid black;
+}
+.login-container button img {
+	position: absolute;
+	left: 8px;
+}
+.button-container {
+	margin-top: 19px;
+}
 form {
 	display: flex;
 	flex-direction: column;
@@ -84,7 +119,7 @@ form input:focus {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    width: 461px;
+	width: 461px;
 	height: 50px;
 }
 .create-account-redirect p:nth-child(2) {
@@ -94,6 +129,6 @@ form input:focus {
 	font-size: 16px;
 	cursor: pointer;
 	text-decoration-line: underline;
-    margin-left: 5px;
+	margin-left: 5px;
 	color: #f9a51a;
 }
