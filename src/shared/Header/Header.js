@@ -8,6 +8,7 @@ import "./Header.css"
 
 const Header = () => {
 	const [user, loading, error] = useAuthState(auth)
+	console.log(user);
 	return (
 		<div className="navigation-container">
 			<NavLink to="/">

@@ -1,28 +1,54 @@
 import React, { useState } from "react"
 import "../Login/Login.css"
 import {
+	useAuthState,
+	useCreateUserWithEmailAndPassword,
 	useSignInWithFacebook,
 	useSignInWithGoogle,
+	useUpdateProfile,
 } from "react-firebase-hooks/auth"
 import googleLogo from "../../images/google.png"
 import facebookLogo from "../../images/fb.png"
 import auth from "../../firebase.init"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { Alert } from "@mui/material"
 
 const Register = () => {
+	const [firstName, setFirstName] = useState("")
+	const [lastName, setLastName] = useState("")
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 	const [rePassword, setRePassword] = useState("")
 	const [signInWithGoogle] = useSignInWithGoogle(auth)
 	const [SignInWithFacebook] = useSignInWithFacebook(auth)
+	const [updateProfile] = useUpdateProfile(auth)
+	const [error, setError] = useState("")
+	const [user] = useAuthState(auth)
+	const navigate = useNavigate()
+	const [createUserWithEmailAndPassword, userSu] =
+		useCreateUserWithEmailAndPassword(auth)
+	const handleSignUp = (e) => {
+		e.preventDefault()
 
+		if (password !== rePassword) {
+			setError("Password mismatch")
+		} else if (password.length < 7) {
+			setError("Password too short")
+		} else {
+			createUserWithEmailAndPassword(email, password)
+			
+		}
+	}
+	if (user?.email) {
+		navigate("/")
+	}
 
 	return (
 		<div className="login-container">
-			<form>
+			<form onSubmit={handleSignUp}>
 				<h1>Create an account</h1>
 				<input
-					onClick={(e) => setEmail(e.target.value)}
+					onBlur={(e) => setFirstName(e.target.value)}
 					placeholder="First Name"
 					type="text"
 					name="first-name"
@@ -30,7 +56,7 @@ const Register = () => {
 					required
 				/>
 				<input
-					onClick={(e) => setEmail(e.target.value)}
+					onBlur={(e) => setLastName(e.target.value)}
 					placeholder="Last Name"
 					type="text"
 					name="last-name"
@@ -38,7 +64,7 @@ const Register = () => {
 					required
 				/>
 				<input
-					onClick={(e) => setEmail(e.target.value)}
+					onBlur={(e) => setEmail(e.target.value)}
 					placeholder="Username or Email"
 					type="email"
 					name="email"
@@ -46,7 +72,7 @@ const Register = () => {
 					required
 				/>
 				<input
-					onClick={(e) => setPassword(e.target.value)}
+					onBlur={(e) => setPassword(e.target.value)}
 					placeholder="Password"
 					type="password"
 					name="password"
@@ -54,11 +80,11 @@ const Register = () => {
 					required
 				/>
 				<input
-					onClick={(e) => setRePassword(e.target.value)}
+					onBlur={(e) => setRePassword(e.target.value)}
 					placeholder="Confirm Password"
 					type="Password"
 					name="rePassword"
-					id="password"
+					id="rePassword"
 					required
 				/>
 				<div className="input-container">
@@ -68,6 +94,8 @@ const Register = () => {
 					</p>
 					<p className="forgot-password">Forgot password?</p>
 				</div>
+				{error && <Alert severity="error">{error}</Alert>}
+
 				<input type="submit" value="Create an account" id="login-btn" />
 				<div className="create-account-redirect">
 					<p> Don't have an account?</p>
