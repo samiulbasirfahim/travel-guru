@@ -7,10 +7,10 @@ import {
 import googleLogo from "../../images/google.png"
 import facebookLogo from "../../images/fb.png"
 import auth from "../../firebase.init"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth"
 
-const Login = () => {
+const Register = () => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 	const [signInWithGoogle] = useSignInWithGoogle(auth)
@@ -20,7 +20,7 @@ const Login = () => {
 
 	const handleLogin = (event) => {
 		event.preventDefault()
-		createUserWithEmailAndPassword(email,password)
+		createUserWithEmailAndPassword(email, password)
 		console.log(error)
 	}
 	return (
@@ -53,7 +53,7 @@ const Login = () => {
 				<input type="submit" value="Login" id="login-btn" />
 				<div className="create-account-redirect">
 					<p> Don't have an account?</p>
-					<Link to="/register">Create an account</Link>
+					<p>Create an account</p>
 				</div>
 			</form>
 			<p className="or">Or</p>
@@ -71,4 +71,4 @@ const Login = () => {
 	)
 }
 
-export default Login
+export default Register

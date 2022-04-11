@@ -1,9 +1,13 @@
+import { signOut } from "firebase/auth"
 import React from "react"
+import { useAuthState } from "react-firebase-hooks/auth"
 import { NavLink } from "react-router-dom"
+import auth from "../../firebase.init"
 import logo from "../../images/logo.png"
 import "./Header.css"
 
 const Header = () => {
+	const [user, loading, error] = useAuthState(auth)
 	return (
 		<div className="navigation-container">
 			<NavLink to="/">
@@ -14,7 +18,7 @@ const Header = () => {
 					className={({ isActive }) => {
 						return isActive ? "active-nav" : ""
 					}}
-					to={'/'}
+					to={"/"}
 				>
 					News
 				</NavLink>
@@ -43,14 +47,18 @@ const Header = () => {
 				>
 					Contact
 				</NavLink>
-				<NavLink
-					className={({ isActive }) => {
-						return isActive ? "active-nav" : ""
-					}}
-					to="/login"
-				>
-					Login
-				</NavLink>
+				{!user ? (
+					<NavLink
+						className={({ isActive }) => {
+							return isActive ? "active-nav" : ""
+						}}
+						to="/login"
+					>
+						Login
+					</NavLink>
+				) : (
+					<button onClick={() => signOut(auth)}>Sign Out</button>
+				)}
 			</nav>
 		</div>
 	)

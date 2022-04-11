@@ -12,10 +12,25 @@ nav a {
 	color: black;
 	font-weight: 500;
 	text-decoration: none;
-	font-family: 'Montserrat', sans-serif;
+	font-family: "Montserrat", sans-serif;
 }
-.active-nav{
-	background-color: #F9A51A;
+nav button {
+	margin-left: 50px;
+	color: black;
+	font-weight: 500;
+	text-decoration: none;
+	font-family: "Montserrat", sans-serif;
+	outline: none;
+	border: 0px;
+	background-color: #e62727;
+	padding: 12px 29px;
+	border-radius: 5px;
+	color: white;
+	cursor: pointer;
+	font-size: 16px;
+}
+.active-nav {
+	background-color: #f9a51a;
 	padding: 12px 29px;
 	border-radius: 5px;
 }
